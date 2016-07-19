@@ -17,28 +17,28 @@ public class PlayerMove : MonoBehaviour
 		if (Input.GetKey (KeyCode.W)) {
 			// Time.deltaTime is the duration of the frame in second
 			transform.position += new Vector3 (0f, 35f, 0f) * Time.deltaTime;
-			Debug.Log (transform.position.y);
+			//aDebug.Log (transform.position.y);
 		}
 		if (Input.GetKey (KeyCode.D)) {
 			// Time.deltaTime is the duration of the frame in second
 			transform.position += new Vector3 (30f, 0f, 0f) * Time.deltaTime;
-			Debug.Log (transform.position.y);
+			//Debug.Log (transform.position.y);
 		}
 		if (Input.GetKey (KeyCode.A)) {
 			// Time.deltaTime is the duration of the frame in second
 			transform.position += new Vector3 (-30f, 0f, 0f) * Time.deltaTime;
-			Debug.Log (transform.position.y);
+			//Debug.Log (transform.position.y);
 		}
 		if (Input.GetKey (KeyCode.S)) {
 			// Time.deltaTime is the duration of the frame in second
 			transform.position += new Vector3 (0f, -30f, 0f) * Time.deltaTime;
-			Debug.Log (transform.position.y);
+			//Debug.Log (transform.position.y);
 		}
 
-
+		//Rotate player
 		Vector3 pos = Camera.main.WorldToScreenPoint (transform.position);
 		Vector3 dir = Input.mousePosition - pos;
-		float angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
+		float angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg; //inverse tan in degrees
 		transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
 
 	}

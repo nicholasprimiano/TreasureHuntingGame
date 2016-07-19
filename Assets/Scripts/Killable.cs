@@ -20,9 +20,8 @@ public class Killable : MonoBehaviour
 		currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
 
 		if (currentHealth <= 0) {
-			Destroy (gameObject);
+			gameObject.SetActive (false);
 		}
-
 		Debug.Log (currentHealth);
 	}
 }
