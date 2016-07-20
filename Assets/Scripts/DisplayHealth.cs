@@ -11,6 +11,6 @@ public class DisplayHealth : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		healthText.text = "Health: " + killable.currentHealth;
+		healthText.text = "Health: ";// + killable.currentHealth;
 	}
 }

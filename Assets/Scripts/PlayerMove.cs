@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	
+		Cursor.visible = true;
 	}
 	
 	// Update is called once per frame
@@ -38,8 +38,10 @@ public class PlayerMove : MonoBehaviour
 		//Rotate player
 		Vector3 pos = Camera.main.WorldToScreenPoint (transform.position);
 		Vector3 dir = Input.mousePosition - pos;
+		dir.Normalize ();
 		float angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg; //inverse tan in degrees
 		transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+	
 
 	}
 
