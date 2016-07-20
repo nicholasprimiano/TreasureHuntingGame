@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Experimental.Director;
+using UnityEngine.SceneManagement;
 
 public class Killable : MonoBehaviour
 {
@@ -24,23 +25,23 @@ public class Killable : MonoBehaviour
 			if (currentHealth <= 0) {
 				AudioSource audio = GetComponent<AudioSource> ();
 				audio.Play ();
-//				if (tag == "Enemy") {
-//					damage = 0;
-//					turnoff ();
-//				}
-				gameObject.SetActive (false);
+				if (tag == "Enemy") {
+					damage = 0;
+					turnoff ();
+				} else if (tag == "Player") {
+					SceneManager.LoadScene ("Death Scene");
+				}
 			}
 		}
 	}
 
-	//	public SpriteRenderer spredner;
-	//
-	//	void turnoff ()
-	//	{
-	//		spredner = GetComponent <SpriteRenderer> ();
-	//		spredner.renderer. = false;
-	//
-	//	}
+	private SpriteRenderer spredner;
+
+	void turnoff ()
+	{
+		spredner = GetComponent <SpriteRenderer> ();
+		spredner.color = new Color (0, 0, 0, 0);
+	}
 
 
 }
