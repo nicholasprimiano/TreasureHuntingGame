@@ -23,6 +23,7 @@ public class Killable : MonoBehaviour
 			Debug.Log ("Taking Damage");
 			currentHealth -= damage;
 			currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
+			//TODO add damge sound
 			if (currentHealth <= 0) {
 				if (tag == "Enemy") {
 					AudioSource audio = GetComponent<AudioSource> ();
