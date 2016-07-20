@@ -7,6 +7,8 @@ public class CanBeShot : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D collider)
 	{
+		AudioSource audio = GetComponent<AudioSource> ();
+		audio.Play ();
 		canBeShot = true;
 	}
 }

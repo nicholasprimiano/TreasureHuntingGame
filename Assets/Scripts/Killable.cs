@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Experimental.Director;
 
 public class Killable : MonoBehaviour
 {
@@ -20,10 +21,26 @@ public class Killable : MonoBehaviour
 		if (canBeShot.canBeShot) {
 			currentHealth -= damage;
 			currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
-
 			if (currentHealth <= 0) {
+				AudioSource audio = GetComponent<AudioSource> ();
+				audio.Play ();
+//				if (tag == "Enemy") {
+//					damage = 0;
+//					turnoff ();
+//				}
 				gameObject.SetActive (false);
 			}
 		}
 	}
+
+	//	public SpriteRenderer spredner;
+	//
+	//	void turnoff ()
+	//	{
+	//		spredner = GetComponent <SpriteRenderer> ();
+	//		spredner.renderer. = false;
+	//
+	//	}
+
+
 }
