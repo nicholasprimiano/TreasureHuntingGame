@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class Treasure : MonoBehaviour
 {
 
-	//bool didPlayerWin = false;
 	public Text textbuffer;
 	public Transform PlayerObject;
 	public Transform Hint1;
@@ -19,7 +18,6 @@ public class Treasure : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
 		textbuffer.text = "Treasure is waiting for you somewhere";
 
 		if ((PlayerObject.position - Hint1.position).magnitude < 20f) {

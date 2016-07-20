@@ -20,16 +20,17 @@ public class Killable : MonoBehaviour
 	public void Hurt (int damage)
 	{
 		if (canBeShot.canBeShot) {
+			Debug.Log ("Taking Damage");
 			currentHealth -= damage;
 			currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
 			if (currentHealth <= 0) {
-				AudioSource audio = GetComponent<AudioSource> ();
-				audio.Play ();
 				if (tag == "Enemy") {
+					AudioSource audio = GetComponent<AudioSource> ();
+					audio.Play ();
 					damage = 0;
 					turnoff ();
 				} else if (tag == "Player") {
-					SceneManager.LoadScene ("Death Scene");
+					SceneManager.LoadScene ("Death Screen");
 				}
 			}
 		}

@@ -9,6 +9,6 @@ public class CanBeShot : MonoBehaviour
 	{
 		AudioSource audio = GetComponent<AudioSource> ();
 		audio.Play ();
-		canBeShot = true;
+		//canBeShot = true;
 	}
 }
