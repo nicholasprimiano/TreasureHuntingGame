@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMove : MonoBehaviour {
+public class PlayerMove : MonoBehaviour
+{
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		//if the player holds down W, move up
 		if (Input.GetKey (KeyCode.W)) {
 			// Time.deltaTime is the duration of the frame in second
@@ -31,6 +34,18 @@ public class PlayerMove : MonoBehaviour {
 			transform.position += new Vector3 (0f, -30f, 0f) * Time.deltaTime;
 			Debug.Log (transform.position.y);
 		}
+
+
+		Vector3 pos = Camera.main.WorldToScreenPoint (transform.position);
+		Vector3 dir = Input.mousePosition - pos;
+		float angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+
 	}
+
+
+
+
+
 }
 

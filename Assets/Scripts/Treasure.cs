@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class Treasure : MonoBehaviour {
+
+public class Treasure : MonoBehaviour
+{
 
 	bool didPlayerWin = false;
 	public Text textbuffer;
@@ -14,7 +17,8 @@ public class Treasure : MonoBehaviour {
 	public Transform Treasure1;
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 
 		textbuffer.text = "Treasure is waiting for you somewhere";
 
@@ -27,15 +31,9 @@ public class Treasure : MonoBehaviour {
 		} else if ((PlayerObject.position - Hint4.position).magnitude < 20f) {
 			textbuffer.text = "Almost, almost!.";
 		} else if ((PlayerObject.position - Treasure1.position).magnitude < 15f) {
-			
 			textbuffer.text = "Press [SPACE] to get treasure";
-	
-			if (Input.GetKey (KeyCode.Space)) {
-				didPlayerWin = true;
-			}
-
-			if (didPlayerWin) {
-				textbuffer.text = "Sorry for playing this boring game...";
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				SceneManager.LoadScene ("Win Screen");
 			}
 		}
 	}
