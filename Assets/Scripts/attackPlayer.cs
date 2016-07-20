@@ -8,7 +8,6 @@ public class attackPlayer : MonoBehaviour
 	public Vector3 moveDist = new Vector3 (0, -1, 0);
 	private bool onEnter = false;
 
-
 	void Update ()
 	{
 		if (onEnter) {

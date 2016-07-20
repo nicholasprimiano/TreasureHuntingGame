@@ -13,7 +13,6 @@ public class Destroy : MonoBehaviour
 		if (activator.GetComponent<Killable> () != null) {          
 			activator.GetComponent<Killable> ().Hurt (damage);
 		}   
-		Debug.Log ("Trigger");
 	}
 		
 

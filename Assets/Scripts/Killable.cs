@@ -4,7 +4,8 @@ using System.Collections;
 public class Killable : MonoBehaviour
 {
 	public int maxHealth = 100;
-	public int currentHealth = 0;
+	public int currentHealth = 100;
+	public CanBeShot canBeShot;
 
 	// Use this for initialization
 	void Start ()
@@ -16,12 +17,13 @@ public class Killable : MonoBehaviour
 	//Public so death trigger can talk to it
 	public void Hurt (int damage)
 	{
-		currentHealth -= damage;
-		currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
+		if (canBeShot.canBeShot) {
+			currentHealth -= damage;
+			currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
 
-		if (currentHealth <= 0) {
-			gameObject.SetActive (false);
+			if (currentHealth <= 0) {
+				gameObject.SetActive (false);
+			}
 		}
-		Debug.Log (currentHealth);
 	}
 }

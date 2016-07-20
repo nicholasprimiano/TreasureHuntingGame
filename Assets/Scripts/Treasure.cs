@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Treasure : MonoBehaviour
 {
 
-	bool didPlayerWin = false;
+	//bool didPlayerWin = false;
 	public Text textbuffer;
 	public Transform PlayerObject;
 	public Transform Hint1;
