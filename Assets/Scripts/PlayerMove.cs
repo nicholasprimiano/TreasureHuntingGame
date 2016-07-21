@@ -31,10 +31,10 @@ public class PlayerMove : MonoBehaviour
 		}
 		if (Input.GetKey (KeyCode.A)) {
 			//Rotate CCW
-			transform.RotateAround (new Vector3 (transform.position.x, transform.position.y, transform.position.z), Vector3.forward, 5);
+			transform.RotateAround (new Vector3 (transform.position.x, transform.position.y, transform.position.z), Vector3.forward, 3.5f);
 		}
 		if (Input.GetKey (KeyCode.D)) {
-			transform.RotateAround (new Vector3 (transform.position.x, transform.position.y, transform.position.z), Vector3.forward, -5);
+			transform.RotateAround (new Vector3 (transform.position.x, transform.position.y, transform.position.z), Vector3.forward, -3.5f);
 			//Rotate CW
 		}
 		if (!Input.GetKey (KeyCode.W) && !Input.GetKey (KeyCode.S)) {

@@ -24,7 +24,7 @@ public class Treasure : MonoBehaviour
 		if ((PlayerObject.position - Hint1.position).magnitude < 25f) {
 			textbuffer.text = "SHOOT!!!";
 		} else if ((PlayerObject.position - Hint5.position).magnitude < 20f) {
-			textbuffer.text = "If you hear somthing strange...start shooting!";
+			textbuffer.text = "If you hear somthing strange...start shooting! Also fire is bad fo your health.";
 		} else if ((PlayerObject.position - Hint2.position).magnitude < 20f) {
 			textbuffer.text = "Try another way!";
 		} else if ((PlayerObject.position - Hint3.position).magnitude < 20f) {
