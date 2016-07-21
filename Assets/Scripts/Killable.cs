@@ -19,18 +19,21 @@ public class Killable : MonoBehaviour
 	//Public so death trigger can talk to it
 	public void Hurt (int damage)
 	{
+		//canBeShot.canBeShot is true only after player enters attack trigger
+		//This prevents the player from shooting enemies until they attack
+		//canBeShot.canBeshot is always true for the player
 		if (canBeShot.canBeShot) {
-			//Debug.Log ("Taking Damage");
 			currentHealth -= damage;
+			//clap health for all object between 0 and maxHealth
 			currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
-			//TODO add damge sound
-			if (currentHealth <= 0) {
-				if (tag == "Enemy") {
+			//TODO add damage sound
+			if (currentHealth <= 0) {  // object death
+				if (tag == "Enemy") {  // if the object is an enemy play enemy death sound
 					AudioSource audio = GetComponent<AudioSource> ();
 					audio.Play ();
-					damage = 0;
-					turnoff ();
-				} else if (tag == "Player") {
+					damage = 0;  // enemy will not damage player
+					turnoff ();  // enemy will dissappear
+				} else if (tag == "Player") {  // if player dies go to death screen
 					SceneManager.LoadScene ("Death Screen");
 				}
 			}
@@ -39,7 +42,7 @@ public class Killable : MonoBehaviour
 
 	private SpriteRenderer spredner;
 
-	void turnoff ()
+	void turnoff ()  //make enemy sprite invisible
 	{
 		spredner = GetComponent <SpriteRenderer> ();
 		spredner.color = new Color (0, 0, 0, 0);
