@@ -37,6 +37,11 @@ public class Killable : MonoBehaviour
 					SceneManager.LoadScene ("Death Screen");
 				}
 			}
+			//player takes damage but doesn't die
+			if (tag == "Player") {
+				GetComponent<PlayerMove> ().hurtSound.Play ();
+			}
+
 		}
 	}
 

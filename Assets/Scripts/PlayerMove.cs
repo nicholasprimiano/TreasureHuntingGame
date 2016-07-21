@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
 	public float playerSpeedSet;
 	public float shiftSpeed;
 	private float playerSpeed;
+	public AudioSource hurtSound;
 
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()

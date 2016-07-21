@@ -13,6 +13,7 @@ public class Treasure : MonoBehaviour
 	public Transform Hint2;
 	public Transform Hint3;
 	public Transform Hint4;
+	public Transform Hint5;
 	public Transform Treasure1;
 
 	// Update is called once per frame
@@ -22,6 +23,8 @@ public class Treasure : MonoBehaviour
 
 		if ((PlayerObject.position - Hint1.position).magnitude < 25f) {
 			textbuffer.text = "SHOOT!!!";
+		} else if ((PlayerObject.position - Hint5.position).magnitude < 20f) {
+			textbuffer.text = "If you hear somthing strange...start shooting!";
 		} else if ((PlayerObject.position - Hint2.position).magnitude < 20f) {
 			textbuffer.text = "Try another way!";
 		} else if ((PlayerObject.position - Hint3.position).magnitude < 20f) {
