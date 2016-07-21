@@ -39,7 +39,7 @@ public class Killable : MonoBehaviour
 			}
 			//player takes damage but doesn't die
 			if (tag == "Player") {
-				GetComponent<PlayerMove> ().hurtSound.Play ();
+				GetComponent<PlayerMove> ().hurtSound.PlayOneShot (GetComponent<PlayerMove> ().hurtSound.clip);
 			}
 
 		}
