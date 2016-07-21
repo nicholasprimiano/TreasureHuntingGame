@@ -29,8 +29,8 @@ public class Treasure : MonoBehaviour
 		} else if ((PlayerObject.position - Hint4.position).magnitude < 20f) {
 			textbuffer.text = "Almost, almost!.";
 		} else if ((PlayerObject.position - Treasure1.position).magnitude < 15f) {
-			textbuffer.text = "Press [SPACE] to get treasure";
-			if (Input.GetKeyDown (KeyCode.Space)) {
+			textbuffer.text = "Press [Enter] to get treasure";
+			if (Input.GetKeyDown (KeyCode.Return)) {
 				SceneManager.LoadScene ("Win Screen");
 			}
 		}
