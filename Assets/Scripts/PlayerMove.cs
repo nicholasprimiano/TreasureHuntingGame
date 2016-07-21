@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class PlayerMove : MonoBehaviour
 	public AudioSource hurtSound;
 	public TrailRenderer trailRendererGreen;
 	public TrailRenderer trailRendererRed;
+	private float initialTime;
+	private bool canSprint = true;
+	private const float maxSprintTime = 1f;
+	private bool counting = false;
 
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
@@ -23,6 +28,8 @@ public class PlayerMove : MonoBehaviour
 
 	void Update ()
 	{
+		float currentTime = Time.time;
+
 		if (Input.GetKey (KeyCode.W)) {
 			myRigidbody.velocity = transform.right * playerSpeed;
 		} 
@@ -40,10 +47,21 @@ public class PlayerMove : MonoBehaviour
 		if (!Input.GetKey (KeyCode.W) && !Input.GetKey (KeyCode.S)) {
 			myRigidbody.velocity *= 0.8f;
 		}
-		if (Input.GetKey (KeyCode.LeftShift)) {
-			//SpriteRenderer playerSprite = GetComponent<SpriteRenderer> ();
-			//playerSprite.color = new Color (.8f, .5f, 0f);
 
+		//Sprint Code
+		if (Input.GetKeyDown (KeyCode.LeftShift)) {
+			initialTime = Time.time;
+			counting = true;
+		}
+		if (Input.GetKeyUp (KeyCode.LeftShift)) {
+			counting = false;
+			canSprint = true;
+		}
+		if (counting && (currentTime - initialTime) >= maxSprintTime) {
+			canSprint = false;
+		}
+		Debug.Log (canSprint);
+		if (Input.GetKey (KeyCode.LeftShift) && canSprint) {
 			//attach red trail renderer to player
 			//why is unity terrible there should be a class for this
 			trailRendererRed.transform.parent = transform;
@@ -56,7 +74,7 @@ public class PlayerMove : MonoBehaviour
 			trailRendererRed.enabled = false;
 			playerSpeed = playerSpeedSet;
 		}
-
 	}
+
 }
 
