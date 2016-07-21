@@ -16,7 +16,7 @@ public class PlayerMove : MonoBehaviour
 	private float initialTime;
 	private bool canSprint = true;
 	private const float maxSprintTime = 2f;
-	private const float coolDown = 5f;
+	private const float coolDown = 4f;
 	private bool counting = false;
 	private float coolDownTimer;
 	private bool coolingDown = false;
@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour
 			myRigidbody.velocity = transform.right * playerSpeed;
 		} 
 		if (Input.GetKey (KeyCode.S)) {
-			myRigidbody.velocity = -transform.right * playerSpeed;
+			myRigidbody.velocity = -transform.right * playerSpeed / 2;
 		}
 		if (Input.GetKey (KeyCode.A)) {
 			//Rotate CCW
@@ -54,7 +54,7 @@ public class PlayerMove : MonoBehaviour
 		//Sprint Code
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			initialTime = Time.time;
-			counting = true;
+
 		}
 		if (Input.GetKeyUp (KeyCode.LeftShift)) {
 			counting = false;
@@ -70,6 +70,7 @@ public class PlayerMove : MonoBehaviour
 		}
 		Debug.Log (canSprint);
 		if (Input.GetKey (KeyCode.LeftShift) && canSprint) {
+			counting = true;
 			//attach red trail renderer to player
 			//why is unity terrible there should be a class for this
 			trailRendererRed.transform.parent = transform;
