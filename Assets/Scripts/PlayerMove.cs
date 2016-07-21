@@ -15,8 +15,11 @@ public class PlayerMove : MonoBehaviour
 	public TrailRenderer trailRendererRed;
 	private float initialTime;
 	private bool canSprint = true;
-	private const float maxSprintTime = 1f;
+	private const float maxSprintTime = 2f;
+	private const float coolDown = 5f;
 	private bool counting = false;
+	private float coolDownTimer;
+	private bool coolingDown = false;
 
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
@@ -55,10 +58,15 @@ public class PlayerMove : MonoBehaviour
 		}
 		if (Input.GetKeyUp (KeyCode.LeftShift)) {
 			counting = false;
-			canSprint = true;
+			canSprint = false;
 		}
+
 		if (counting && (currentTime - initialTime) >= maxSprintTime) {
 			canSprint = false;
+		}
+
+		if (currentTime - coolDownTimer >= coolDown) {
+			canSprint = true;
 		}
 		Debug.Log (canSprint);
 		if (Input.GetKey (KeyCode.LeftShift) && canSprint) {
@@ -69,6 +77,8 @@ public class PlayerMove : MonoBehaviour
 			trailRendererGreen.enabled = false;
 			trailRendererRed.enabled = true;
 			playerSpeed = shiftSpeed;
+			coolDownTimer = Time.time;
+
 		} else {
 			trailRendererGreen.enabled = true;
 			trailRendererRed.enabled = false;
