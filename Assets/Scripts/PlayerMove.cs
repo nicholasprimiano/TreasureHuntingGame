@@ -10,6 +10,8 @@ public class PlayerMove : MonoBehaviour
 	public float shiftSpeed;
 	private float playerSpeed;
 	public AudioSource hurtSound;
+	public TrailRenderer trailRendererGreen;
+	public TrailRenderer trailRendererRed;
 
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
@@ -41,8 +43,17 @@ public class PlayerMove : MonoBehaviour
 		if (Input.GetKey (KeyCode.LeftShift)) {
 			//SpriteRenderer playerSprite = GetComponent<SpriteRenderer> ();
 			//playerSprite.color = new Color (.8f, .5f, 0f);
+
+			//attach red trail renderer to player
+			//why is unity terrible there should be a class for this
+			trailRendererRed.transform.parent = transform;
+			trailRendererRed.transform.position = transform.position;
+			trailRendererGreen.enabled = false;
+			trailRendererRed.enabled = true;
 			playerSpeed = shiftSpeed;
 		} else {
+			trailRendererGreen.enabled = true;
+			trailRendererRed.enabled = false;
 			playerSpeed = playerSpeedSet;
 		}
 
