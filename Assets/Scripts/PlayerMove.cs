@@ -39,6 +39,8 @@ public class PlayerMove : MonoBehaviour
 			myRigidbody.velocity *= 0.8f;
 		}
 		if (Input.GetKey (KeyCode.LeftShift)) {
+			//SpriteRenderer playerSprite = GetComponent<SpriteRenderer> ();
+			//playerSprite.color = new Color (.8f, .5f, 0f);
 			playerSpeed = shiftSpeed;
 		} else {
 			playerSpeed = playerSpeedSet;
