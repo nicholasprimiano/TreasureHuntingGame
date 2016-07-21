@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEditorInternal;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -25,7 +24,6 @@ public class PlayerMove : MonoBehaviour
 	public Text boost;
 	public Text counter;
 	private bool inputStart = false;
-
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
 	{
@@ -69,7 +67,7 @@ public class PlayerMove : MonoBehaviour
 			inputStart = true;
 		}
 
-		if (Input.GetKeyUp (KeyCode.LeftShift) && inputStart) {
+		if (Input.GetKeyUp (KeyCode.LeftShift)) {
 			counting = false;
 			canSprint = false;
 		
@@ -87,10 +85,13 @@ public class PlayerMove : MonoBehaviour
 			canSprint = true;
 			boost.gameObject.SetActive (true);
 			counter.gameObject.SetActive (false);
+		} else if (!inputStart) {
+			boost.gameObject.SetActive (true);
+			counter.gameObject.SetActive (false);
 		} else {
 			boost.gameObject.SetActive (false);
 			counter.gameObject.SetActive (true);
-			counter.text = Mathf.Floor (currentTime - coolDownTimer).ToString ();
+			counter.text = Mathf.Floor (Mathf.Abs (coolDownTimer - currentTime)).ToString ();
 
 		}
 
