@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
+using UnityEngine.UI;
+using UnityEditorInternal;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -19,13 +20,20 @@ public class PlayerMove : MonoBehaviour
 	private const float coolDown = 4f;
 	private bool counting = false;
 	private float coolDownTimer;
-	private bool coolingDown = false;
+	public GameObject buttonUp;
+	public GameObject buttonDown;
+	public Text boost;
+	public Text counter;
+	private bool inputStart = false;
 
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
 	{
 		playerSpeed = playerSpeedSet;
 		myRigidbody = GetComponent<Rigidbody2D> ();
+
+		boost.gameObject.SetActive (true);
+		counter.gameObject.SetActive (false);
 	}
 
 
@@ -55,10 +63,20 @@ public class PlayerMove : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			initialTime = Time.time;
 
+			//button logic
+			buttonUp.SetActive (true);
+			buttonUp.SetActive (false);
+			inputStart = true;
 		}
-		if (Input.GetKeyUp (KeyCode.LeftShift)) {
+
+		if (Input.GetKeyUp (KeyCode.LeftShift) && inputStart) {
 			counting = false;
 			canSprint = false;
+		
+			//button logic
+			buttonUp.SetActive (false);
+			buttonUp.SetActive (true);
+
 		}
 
 		if (counting && (currentTime - initialTime) >= maxSprintTime) {
@@ -67,7 +85,19 @@ public class PlayerMove : MonoBehaviour
 
 		if (currentTime - coolDownTimer >= coolDown) {
 			canSprint = true;
+			boost.gameObject.SetActive (true);
+			counter.gameObject.SetActive (false);
+		} else {
+			boost.gameObject.SetActive (false);
+			counter.gameObject.SetActive (true);
+			counter.text = Mathf.Floor (currentTime - coolDownTimer).ToString ();
+
 		}
+
+		if (Input.GetKeyDown (KeyCode.LeftShift) && canSprint) {
+			coolDownTimer = Time.time;
+		}
+
 		Debug.Log (canSprint);
 		if (Input.GetKey (KeyCode.LeftShift) && canSprint) {
 			counting = true;
@@ -78,12 +108,12 @@ public class PlayerMove : MonoBehaviour
 			trailRendererGreen.enabled = false;
 			trailRendererRed.enabled = true;
 			playerSpeed = shiftSpeed;
-			coolDownTimer = Time.time;
 
 		} else {
 			trailRendererGreen.enabled = true;
 			trailRendererRed.enabled = false;
 			playerSpeed = playerSpeedSet;
+
 		}
 	}
 
