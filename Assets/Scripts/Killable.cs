@@ -29,10 +29,11 @@ public class Killable : MonoBehaviour
 			//TODO add damage sound
 			if (currentHealth <= 0) {  // object death
 				if (tag == "Enemy") {  // if the object is an enemy play enemy death sound
-					AudioSource audio = GetComponent<AudioSource> ();
-					audio.Play ();
-					damage = 0;  // enemy will not damage player
-					turnoff ();  // enemy will dissappear
+					GameObject spikeHitSound = GameObject.Find ("SpikeHit");  //ugly hack
+					AudioSource hitSound = spikeHitSound.GetComponent<AudioSource> ();
+					hitSound.Play ();
+
+					Destroy (gameObject);
 				} else if (tag == "Player") {  // if player dies go to death screen
 					SceneManager.LoadScene ("Death Screen");
 				}
