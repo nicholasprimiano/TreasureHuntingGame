@@ -14,14 +14,20 @@ public class Destroy : MonoBehaviour
 		if (tag == "Fire" && deltaTime >= fireTick) {
 			canDamageMore = true;
 		}
+
 		if (activator.GetComponent<Killable> () != null && canDamageMore) {          
 			activator.GetComponent<Killable> ().Hurt (damage);
 			canDamageMore = false;
 			tickPrevious = Time.time;
 		}
-		if (tag == "Bullet" && activator.tag == "Enemy") { // Destroy Bullet on contact with spike prevent hitting two spikes
+		if (tag == "Bullet" && activator.tag == "Enemy")  { // Destroy Bullet on contact with spike prevent hitting two spikes
 			Destroy (gameObject);
 		}
+			if (tag == "Enemy" && activator.tag == "Player")  { // Destroy Enemy on contact with player
+			Destroy (gameObject);
+		}
+
+
 	}
 }
 
