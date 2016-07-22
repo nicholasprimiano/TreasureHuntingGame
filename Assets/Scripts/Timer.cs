@@ -4,11 +4,18 @@ using System.Collections;
 public class Timer : MonoBehaviour {
 
 
+	static Timer instance = null;
+	void Start () {
+		if (instance != null) {
+			Destroy (gameObject);
+			print ("Duplicate music player self-destructing!");
+		} else {
+			instance = this;
+			GameObject.DontDestroyOnLoad(gameObject);
+		}
 
-
-
-
-
+	}
+		
 	private float timer = 0;
 	void Update(){
 		timer += Time.deltaTime;
