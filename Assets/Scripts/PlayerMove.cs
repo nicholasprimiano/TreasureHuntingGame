@@ -99,7 +99,7 @@ public class PlayerMove : MonoBehaviour
 			coolDownTimer = Time.time;
 		}
 
-		Debug.Log (canSprint);
+		//Debug.Log (canSprint);
 		if (Input.GetKey (KeyCode.LeftShift) && canSprint) {
 			counting = true;
 			//attach red trail renderer to player
