@@ -8,6 +8,8 @@ public class Killable : MonoBehaviour
 	public int maxHealth = 100;
 	public int currentHealth = 100;
 	public CanBeShot canBeShot;
+	public int heathPackValue = 5;
+	public Health healthpack;
 
 	// Use this for initialization
 	void Start ()
@@ -15,6 +17,16 @@ public class Killable : MonoBehaviour
 		// everyone starts with 100% health at the beginning of the game
 		currentHealth = maxHealth;
 	}
+
+	void Update(){
+		if(Input.GetKeyDown(KeyCode.Q) && healthpack.hasHealth){
+			currentHealth += heathPackValue;
+			currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
+			healthpack.healthImage.SetActive (false);
+			healthpack.hasHealth = false;
+		}
+	}
+
 
 	//Public so death trigger can talk to it
 	public void Hurt (int damage)
@@ -32,7 +44,6 @@ public class Killable : MonoBehaviour
 					GameObject spikeHitSound = GameObject.Find ("SpikeHit");  //ugly hack
 					AudioSource hitSound = spikeHitSound.GetComponent<AudioSource> ();
 					hitSound.Play ();
-
 					Destroy (gameObject);
 				} else if (tag == "Player") {  // if player dies go to death screen
 					SceneManager.LoadScene ("Death Screen");

@@ -1,25 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Key : MonoBehaviour {
+public class Health : MonoBehaviour {
 
-	public bool hasKey = false;
+	public bool hasHealth;
 	public Transform player;
-	public GameObject keyImage;
+	public GameObject healthImage;
 
 	// Use this for initialization
 	void Start () {
-		keyImage.SetActive (false);
+		healthImage.SetActive (false);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if((player.transform.position - transform.position).magnitude <= 10f ){
-			hasKey = true;
+			hasHealth = true;
 			gameObject.SetActive (false);
 		}
-		if(hasKey){
-			keyImage.SetActive (true);
+		if(hasHealth){
+			healthImage.SetActive (true);
 		}
 	}
+
+
+
 }
