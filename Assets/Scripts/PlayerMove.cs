@@ -89,9 +89,20 @@ public class PlayerMove : MonoBehaviour
 			boost.gameObject.SetActive (true);
 			counter.gameObject.SetActive (false);
 		} else {
+			float temp;
 			boost.gameObject.SetActive (false);
 			counter.gameObject.SetActive (true);
-			counter.text = Mathf.Floor (Mathf.Abs (coolDownTimer - currentTime)).ToString ();
+			temp = Mathf.Ceil (currentTime - coolDownTimer);
+			//Very ugly hack TO count backwards can't change CD time
+			if (temp == 1) {
+				counter.text = "4";
+			} else if (temp == 2) {
+				counter.text = "3";
+			} else if (temp == 3) {
+				counter.text = "2";
+			} else if (temp == 4) {
+				counter.text = "1";
+			}
 
 		}
 
