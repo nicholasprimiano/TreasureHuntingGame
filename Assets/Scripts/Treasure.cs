@@ -16,13 +16,14 @@ public class Treasure : MonoBehaviour
 	public Transform Hint5;
 	public Transform Treasure1;
 	public Door door;
+	public bool playerWin = false;
+
 	// Update is called once per frame
 	void Update ()
 	{
 		if (!door.nearDoor) {
 			textbuffer.text = "Treasure is waiting for you somewhere";
 		}
-
 		if ((PlayerObject.position - Hint1.position).magnitude < 25f) {
 			textbuffer.text = "SHOOT!!!";
 		} else if ((PlayerObject.position - Hint5.position).magnitude < 20f) {
@@ -36,6 +37,7 @@ public class Treasure : MonoBehaviour
 		} else if ((PlayerObject.position - Treasure1.position).magnitude < 15f) {
 			textbuffer.text = "Press [Enter] to get treasure";
 			if (Input.GetKeyDown (KeyCode.Return)) {
+				playerWin = true;
 				SceneManager.LoadScene ("Win Screen");
 			}
 		}
