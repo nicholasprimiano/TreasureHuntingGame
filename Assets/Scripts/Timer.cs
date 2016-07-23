@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour
 
 	public Treasure win;
 	static Timer instance = null;
-
+	GUIStyle font;
 
 	void Start ()
 	{
@@ -18,7 +18,8 @@ public class Timer : MonoBehaviour
 			instance = this;
 			GameObject.DontDestroyOnLoad (gameObject);
 		}
-
+		font = new GUIStyle ();
+		font.fontSize = 40;
 	}
 
 	private float timer = 0;
@@ -43,7 +44,7 @@ public class Timer : MonoBehaviour
 			Debug.Log ("2");
 		} else {
 			Debug.Log ("3");
-			GUI.Label (new Rect (640 - (125 / 2), 360, 125, 200), "Game Timer :" + time);
+			GUI.Label (new Rect (715, 338, 125, 200), time, font);
 		}
 	}
 }
