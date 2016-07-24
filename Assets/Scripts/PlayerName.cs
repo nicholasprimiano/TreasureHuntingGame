@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerName : MonoBehaviour
 {
@@ -23,11 +24,9 @@ public class PlayerName : MonoBehaviour
 		startButton.SetActive (false);
 	}
 
-
 	public void getText ()
 	{
 		nameReferance = playerName.text;
-		Debug.Log (nameReferance);
 		startButton.SetActive (true);
 	}
 

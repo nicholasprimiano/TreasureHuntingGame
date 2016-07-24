@@ -63,14 +63,6 @@ public class Killable : MonoBehaviour
 
 		}
 	}
-
-	//	private SpriteRenderer spredner;
-	//
-	//	void turnoff ()  //make enemy sprite invisible
-	//	{
-	//		spredner = GetComponent <SpriteRenderer> ();
-	//		spredner.color = new Color (0, 0, 0, 0);
-	//	}
-	//
+		
 
 }

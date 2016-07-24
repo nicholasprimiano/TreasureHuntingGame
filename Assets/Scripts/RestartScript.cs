@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using UnityEditorInternal;
-
 
 public class RestartScript : MonoBehaviour
 {

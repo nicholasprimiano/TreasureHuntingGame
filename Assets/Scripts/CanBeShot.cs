@@ -16,6 +16,7 @@ public class CanBeShot : MonoBehaviour
 	void playSound ()
 	{
 		AudioSource audio = GetComponent<AudioSource> ();
-		audio.Play ();
+		if (!audio.isPlaying)
+			audio.PlayOneShot (audio.clip);
 	}
 }

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.Tizen;
 using UnityEngine.SceneManagement;
 
 
@@ -34,7 +33,7 @@ public class Timer : MonoBehaviour
 		}
 
 		font = new GUIStyle ();
-		font.fontSize = 40;
+		font.fontSize = 36;
 		fontSmall = new GUIStyle ();
 		fontSmall.fontSize = 20;
 		fontSmall.normal.textColor = Color.white;
@@ -54,13 +53,12 @@ public class Timer : MonoBehaviour
 		int seconds = Mathf.FloorToInt (timer - minutes * 60);
 		string time = string.Format ("{0:00}:{1:00}", minutes, seconds);
 
-		if (!win.playerWin) {
+		if (!win.playerWin && scene.name == "PlayerMoving") {
 			//GUI.Label (new Rect (10, 10, 500, 200), "Game Timer :", guiStyle);
 			//GUI.Label (new Rect (136, 10, 500, 200), time, guiStyle);
 			GUI.Box (new Rect (10, 10, 125, 25), "Game Timer : " + time, fontSmall);
 		} else if (win.playerWin) {
-			GUI.Label (new Rect (715, 338, 125, 200), time, font);
-	
+			GUI.Label (new Rect (710, 338, 125, 200), time, font);
 		}
 	}
 }
