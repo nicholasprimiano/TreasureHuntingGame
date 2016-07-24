@@ -25,7 +25,7 @@ public class PlayerMove : MonoBehaviour
 	public Text boost;
 	public Text counter;
 	private bool inputStart = false;
-	public int numFireShields = 5;
+	public int numFireShields = 3;
 	public bool immumeFire = false;
 	public float fireSheildTime = 2f;
 
@@ -33,6 +33,12 @@ public class PlayerMove : MonoBehaviour
 
 	float startTimeFireShield;
 	bool fireIsCounting = false;
+
+	public GameObject shield1;
+	public GameObject shield2;
+	public GameObject shield3;
+	public GameObject shield4;
+
 
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
@@ -60,16 +66,24 @@ public class PlayerMove : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown (KeyCode.E) && numFireShields > 0 && (currentTime - startTimeFireShield <= fireSheildTime)) {
-			
-			numFireShields = numFireShields - 1;
 			fireShield ();
+			numFireShields = numFireShields - 1;
 		}
+
+		//hack 
+		if (numFireShields == 2) {
+			shield1.SetActive (false);
+		} else if (numFireShields == 1) {
+			shield2.SetActive (false);
+		} else if (numFireShields == 0) {
+			shield3.SetActive (false);
+		}	
 
 		if (currentTime - startTimeFireShield > fireSheildTime) {
 			fireIsCounting = false;
 			immumeFire = false;
 		}
-		Debug.Log (numFireShields);
+		//Debug.Log (numFireShields);
 			
 
 

@@ -1,24 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Tizen;
+using UnityEngine.SceneManagement;
+
 
 public class Timer : MonoBehaviour
 {
 
-	public Treasure win;
+	public GameObject playerWin;
 	static Timer instance = null;
 	GUIStyle font;
 	GUIStyle fontSmall;
+	public float timer = 0;
+	private Treasure win;
+	private Scene scene;
 
 	void Start ()
 	{
+		win = playerWin.GetComponent<Treasure> ();
+
+		scene = SceneManager.GetActiveScene ();
+
+
 		if (instance != null) {
 			Destroy (gameObject);
-			print ("Duplicate music player self-destructing!");
+
 		} else {
 			instance = this;
+
 			GameObject.DontDestroyOnLoad (gameObject);
+
 		}
+
 		font = new GUIStyle ();
 		font.fontSize = 40;
 		fontSmall = new GUIStyle ();
@@ -26,13 +40,12 @@ public class Timer : MonoBehaviour
 		fontSmall.normal.textColor = Color.white;
 	}
 
-	private float timer = 0;
-
 	void Update ()
 	{
 		if (!win.playerWin) {
 			timer += Time.deltaTime;
 		}
+
 	}
 
 	void OnGUI ()
@@ -45,9 +58,9 @@ public class Timer : MonoBehaviour
 			//GUI.Label (new Rect (10, 10, 500, 200), "Game Timer :", guiStyle);
 			//GUI.Label (new Rect (136, 10, 500, 200), time, guiStyle);
 			GUI.Box (new Rect (10, 10, 125, 25), "Game Timer : " + time, fontSmall);
-
-		} else {
+		} else if (win.playerWin) {
 			GUI.Label (new Rect (715, 338, 125, 200), time, font);
+	
 		}
 	}
 }

@@ -18,9 +18,12 @@ public class Treasure : MonoBehaviour
 	public Door door;
 	public bool playerWin = false;
 
+
 	// Update is called once per frame
 	void Update ()
 	{
+		playerWin = false;
+		
 		if (!door.nearDoor) {
 			textbuffer.text = "Treasure is waiting for you somewhere";
 		}
