@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Net;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class PlayerMove : MonoBehaviour
 	public Text boost;
 	public Text counter;
 	private bool inputStart = false;
+	public int numFireShields = 2;
+	public bool immumeFire = false;
+
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
 	{
@@ -34,10 +38,24 @@ public class PlayerMove : MonoBehaviour
 		counter.gameObject.SetActive (false);
 	}
 
+	void fireShield ()
+	{
+
+
+		immumeFire = false;
+		numFireShields -= numFireShields;
+
+	}
 
 	void Update ()
 	{
+	
 		float currentTime = Time.time;
+
+
+		if (Input.GetKeyDown (KeyCode.E) && numFireShields > 0) {
+			fireShield ();
+		}
 
 		if (Input.GetKey (KeyCode.W)) {
 			myRigidbody.velocity = transform.right * playerSpeed;

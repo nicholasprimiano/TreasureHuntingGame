@@ -10,6 +10,7 @@ public class Killable : MonoBehaviour
 	public CanBeShot canBeShot;
 	public int heathPackValue = 5;
 	public Health healthpack;
+	public PlayerMove player;
 
 	// Use this for initialization
 	void Start ()
@@ -18,8 +19,9 @@ public class Killable : MonoBehaviour
 		currentHealth = maxHealth;
 	}
 
-	void Update(){
-		if(Input.GetKeyDown(KeyCode.Q) && healthpack.hasHealth){
+	void Update ()
+	{
+		if (Input.GetKeyDown (KeyCode.Q) && healthpack.hasHealth) {
 			currentHealth += heathPackValue;
 			currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
 			healthpack.healthImage.SetActive (false);
@@ -35,7 +37,13 @@ public class Killable : MonoBehaviour
 		//This prevents the player from shooting enemies until they attack
 		//canBeShot.canBeshot is always true for the player
 		if (canBeShot.canBeShot) {
-			currentHealth -= damage;
+			if (tag == "Player" && !player.immumeFire) {
+				currentHealth -= damage;
+				//TODO fix this
+			} else if (tag == "Enemy") {
+				currentHealth -= damage;	
+			}
+
 			//clap health for all object between 0 and maxHealth
 			currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
 			//TODO add damage sound
@@ -57,13 +65,13 @@ public class Killable : MonoBehaviour
 		}
 	}
 
-//	private SpriteRenderer spredner;
-//
-//	void turnoff ()  //make enemy sprite invisible
-//	{
-//		spredner = GetComponent <SpriteRenderer> ();
-//		spredner.color = new Color (0, 0, 0, 0);
-//	}
-//
+	//	private SpriteRenderer spredner;
+	//
+	//	void turnoff ()  //make enemy sprite invisible
+	//	{
+	//		spredner = GetComponent <SpriteRenderer> ();
+	//		spredner.color = new Color (0, 0, 0, 0);
+	//	}
+	//
 
 }
