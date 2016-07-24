@@ -25,8 +25,14 @@ public class PlayerMove : MonoBehaviour
 	public Text boost;
 	public Text counter;
 	private bool inputStart = false;
-	public int numFireShields = 2;
+	public int numFireShields = 5;
 	public bool immumeFire = false;
+	public float fireSheildTime = 2f;
+
+	float currentTime;
+
+	float startTimeFireShield;
+	bool fireIsCounting = false;
 
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
@@ -40,22 +46,32 @@ public class PlayerMove : MonoBehaviour
 
 	void fireShield ()
 	{
-
-
-		immumeFire = false;
-		numFireShields -= numFireShields;
+		fireIsCounting = true;
+		immumeFire = true;
 
 	}
 
 	void Update ()
 	{
-	
-		float currentTime = Time.time;
+		currentTime = Time.time;
 
+		if (!fireIsCounting) {
+			startTimeFireShield = currentTime;
+		}
 
-		if (Input.GetKeyDown (KeyCode.E) && numFireShields > 0) {
+		if (Input.GetKeyDown (KeyCode.E) && numFireShields > 0 && (currentTime - startTimeFireShield <= fireSheildTime)) {
+			
+			numFireShields = numFireShields - 1;
 			fireShield ();
 		}
+
+		if (currentTime - startTimeFireShield > fireSheildTime) {
+			fireIsCounting = false;
+			immumeFire = false;
+		}
+		Debug.Log (numFireShields);
+			
+
 
 		if (Input.GetKey (KeyCode.W)) {
 			myRigidbody.velocity = transform.right * playerSpeed;

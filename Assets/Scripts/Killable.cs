@@ -36,8 +36,10 @@ public class Killable : MonoBehaviour
 		//canBeShot.canBeShot is true only after player enters attack trigger
 		//This prevents the player from shooting enemies until they attack
 		//canBeShot.canBeshot is always true for the player
+		//Debug.Log (player.immumeFire);
 		if (canBeShot.canBeShot) {
 			if (tag == "Player" && !player.immumeFire) {
+				GetComponent<PlayerMove> ().hurtSound.PlayOneShot (GetComponent<PlayerMove> ().hurtSound.clip);
 				currentHealth -= damage;
 				//TODO fix this
 			} else if (tag == "Enemy") {
@@ -57,10 +59,7 @@ public class Killable : MonoBehaviour
 					SceneManager.LoadScene ("Death Screen");
 				}
 			}
-			//player takes damage but doesn't die
-			if (tag == "Player") {
-				GetComponent<PlayerMove> ().hurtSound.PlayOneShot (GetComponent<PlayerMove> ().hurtSound.clip);
-			}
+
 
 		}
 	}
