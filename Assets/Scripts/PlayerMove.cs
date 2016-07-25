@@ -38,7 +38,7 @@ public class PlayerMove : MonoBehaviour
 	public GameObject shield2;
 	public GameObject shield3;
 	public GameObject shield4;
-
+	private bool shieldActive = false;
 
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
@@ -54,7 +54,8 @@ public class PlayerMove : MonoBehaviour
 	{
 		fireIsCounting = true;
 		immumeFire = true;
-
+		shieldActive = true;
+	
 	}
 
 	void Update ()
@@ -65,7 +66,7 @@ public class PlayerMove : MonoBehaviour
 			startTimeFireShield = currentTime;
 		}
 
-		if (Input.GetKeyDown (KeyCode.E) && numFireShields > 0 && (currentTime - startTimeFireShield <= fireSheildTime)) {
+		if (Input.GetKeyDown (KeyCode.E) && numFireShields > 0 && (currentTime - startTimeFireShield <= fireSheildTime) && !shieldActive) {
 			fireShield ();
 			numFireShields = numFireShields - 1;
 		}
@@ -82,6 +83,7 @@ public class PlayerMove : MonoBehaviour
 		if (currentTime - startTimeFireShield > fireSheildTime) {
 			fireIsCounting = false;
 			immumeFire = false;
+			shieldActive = false;
 		}
 		//Debug.Log (numFireShields);
 			

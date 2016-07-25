@@ -9,15 +9,19 @@ public class Door : MonoBehaviour
 	public Treasure textbuffer;
 	public bool nearDoor = false;
 	private bool playOnceOpen = true;
+	private bool doorOpening = false;
+	public float moveDistance = 42f;
+	private Vector3 initalPos;
+	private bool canPlay = true;
 
 	// Use this for initialization
 	void Start ()
 	{
-
+		initalPos = transform.position; 
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
 	{
 
 
@@ -29,18 +33,27 @@ public class Door : MonoBehaviour
 				audio.PlayOneShot (audio.clip);
 				playOnceOpen = false;
 			}
-
-			transform.position += new Vector3 (transform.position.x, transform.position.y + 10f, transform.position.z);
+			doorOpening = true;
 			//gameObject.SetActive (false);
 		}
+		Debug.Log (playerKey.hasKey);
 		if ((player.transform.position - transform.position).magnitude <= 20f) {
 			textbuffer.textbuffer.text = "The door is locked. Find the key";
 			nearDoor = true;
 			GameObject lockedDoor = GameObject.FindGameObjectWithTag ("DoorLocked");
 			AudioSource audio = lockedDoor.GetComponent<AudioSource> ();
-			if (!audio.isPlaying)
+			if (!audio.isPlaying && canPlay)
 				audio.PlayOneShot (audio.clip);
-
 		}
+
+		if (doorOpening && Mathf.Abs (transform.position.y - initalPos.y) <= moveDistance) {
+			openDoor ();
+		}
+	}
+
+	void openDoor ()
+	{
+		transform.position -= new Vector3 (0, transform.position.y + .01f, 0);
+		canPlay = false;
 	}
 }
