@@ -87,8 +87,6 @@ public class PlayerMove : MonoBehaviour
 		}
 		//Debug.Log (numFireShields);
 			
-
-
 		if (Input.GetKey (KeyCode.W)) {
 			myRigidbody.velocity = transform.right * playerSpeed;
 		} 

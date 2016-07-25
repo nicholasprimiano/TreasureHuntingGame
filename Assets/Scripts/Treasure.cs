@@ -29,12 +29,6 @@ public class Treasure : MonoBehaviour
 	private bool playable5 = true;
 	private bool hasPlayed5 = false;
 
-	void Start ()
-	{
-		GameObject musicPlayer = GameObject.FindWithTag ("Music Player");
-		musicPlayer.SetActive (true);
-		Debug.Log (musicPlayer.name);
-	}
 
 	// Update is called once per frame
 	void Update ()
