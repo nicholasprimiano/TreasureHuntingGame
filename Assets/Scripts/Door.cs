@@ -36,12 +36,12 @@ public class Door : MonoBehaviour
 			playerKey.keyImage.SetActive (false);
 		}
 
-		if ((player.transform.position - transform.position).magnitude <= 20f) {
+		if ((player.transform.position - transform.position).magnitude <= 20f && canPlay) {
 			textbuffer.textbuffer.text = "The door is locked. Find the key";
 			nearDoor = true;
 			GameObject lockedDoor = GameObject.FindGameObjectWithTag ("DoorLocked");
 			AudioSource audio = lockedDoor.GetComponent<AudioSource> ();
-			if (!audio.isPlaying && canPlay)
+			if (!audio.isPlaying)
 				audio.PlayOneShot (audio.clip);
 		}
 

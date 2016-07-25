@@ -5,7 +5,7 @@ public class RestartSoundPlayer : MonoBehaviour
 {
 
 	static RestartSoundPlayer instance = null;
-
+	private MusicPlayer musicPlayer;
 	// Use this for initialization
 	void Start ()
 	{
@@ -16,14 +16,18 @@ public class RestartSoundPlayer : MonoBehaviour
 			instance = this;
 			GameObject.DontDestroyOnLoad (gameObject);
 		}
+		musicPlayer = FindObjectOfType<MusicPlayer> ();
+		musicPlayer.gameObject.SetActive (false);
 	}
 
 	void Update ()
 	{
+
 		if (Input.GetKeyDown (KeyCode.R)) {
 			AudioSource auido = GetComponent<AudioSource> ();
 			if (!auido.isPlaying) {
 				auido.Play ();
+				musicPlayer.gameObject.SetActive (true);
 			}
 		}
 	}

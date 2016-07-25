@@ -16,6 +16,7 @@ public class Treasure : MonoBehaviour
 	public Transform Hint5;
 	public Transform Treasure1;
 	public Door door;
+	public Key key;
 	public bool playerWin = false;
 	private bool playable = true;
 	private bool hasPlayed = false;
@@ -28,9 +29,17 @@ public class Treasure : MonoBehaviour
 	private bool playable5 = true;
 	private bool hasPlayed5 = false;
 
+	void Start ()
+	{
+		GameObject musicPlayer = GameObject.FindWithTag ("Music Player");
+		musicPlayer.SetActive (true);
+		Debug.Log (musicPlayer.name);
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
+
 		AudioSource notification = GetComponent<AudioSource> ();
 		
 		if (!door.nearDoor) {
@@ -51,7 +60,11 @@ public class Treasure : MonoBehaviour
 				hasPlayed2 = true;
 				playable2 = false;
 			}
-			textbuffer.text = "I saw a key nearby.";
+			if (key.hasKey) {
+				textbuffer.text = "I see you found the key.";
+			} else {
+				textbuffer.text = "I saw a key nearby.";
+			}
 		} else if ((PlayerObject.position - Hint3.position).magnitude < 20f) {
 			if (!notification.isPlaying && playable3) {
 				notification.PlayOneShot (notification.clip);
@@ -60,9 +73,9 @@ public class Treasure : MonoBehaviour
 			}
 			textbuffer.text = "I am sure you can find the treasure if you choose a different path....";
 		} else if ((PlayerObject.position - Hint4.position).magnitude < 20f) {
+			textbuffer.text = "Almost there!";
 			if (!notification.isPlaying && playable4) {
 				notification.PlayOneShot (notification.clip);
-				textbuffer.text = "Almost there!.";
 				hasPlayed4 = true;
 				playable4 = false;
 			}
