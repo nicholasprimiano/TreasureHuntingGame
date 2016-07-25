@@ -29,11 +29,10 @@ public class Killable : MonoBehaviour
 			} else {
 				currentHealth = Mathf.Clamp (currentHealth, 0, easyMaxHealth);
 			}
-
 			healthpack.healthImage.SetActive (false);
 			healthpack.hasHealth = false;
 		}
-		if (Input.GetKeyDown (KeyCode.F)) {
+		if (Input.GetKeyDown (KeyCode.F) && !easyMode) {
 			currentHealth = easyMaxHealth;
 			easyMode = true;
 		}

@@ -22,7 +22,6 @@ public class RestartSoundPlayer : MonoBehaviour
 
 	void Update ()
 	{
-
 		if (Input.GetKeyDown (KeyCode.R)) {
 			AudioSource auido = GetComponent<AudioSource> ();
 			if (!auido.isPlaying) {

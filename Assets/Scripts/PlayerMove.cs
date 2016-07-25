@@ -41,6 +41,8 @@ public class PlayerMove : MonoBehaviour
 	private bool shieldActive = false;
 	public float easySpeed;
 	public float easyShiftSpeed;
+	private GameObject failUI;
+	private bool playOnce = true;
 
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
@@ -51,8 +53,12 @@ public class PlayerMove : MonoBehaviour
 		boost.gameObject.SetActive (true);
 		counter.gameObject.SetActive (false);
 
+		//Easy Mode
 		easySpeed = playerSpeed * 2;
 		easyShiftSpeed = shiftSpeed * 1.5f;
+		failUI = GameObject.FindWithTag ("Fail UI");
+		failUI.SetActive (false);
+		
 	}
 
 	void fireShield ()
@@ -98,10 +104,19 @@ public class PlayerMove : MonoBehaviour
 			shiftSpeed = easyShiftSpeed;
 			//Debug.Log (easySpeed);
 			//Debug.Log (playerSpeed);
-		}
+
+
+			if (playOnce) {
+				AudioSource audio = failUI.GetComponent<AudioSource> ();
+				audio.Play ();
+				playOnce = false;
+			}
+
+			failUI.SetActive (true);
+		} 
 
 		if (Input.GetKey (KeyCode.W)) {
-			Debug.Log (playerSpeed);
+			//Debug.Log (playerSpeed);
 			myRigidbody.velocity = transform.right * playerSpeed;
 		} 
 		if (Input.GetKey (KeyCode.S)) {

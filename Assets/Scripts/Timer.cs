@@ -14,11 +14,14 @@ public class Timer : MonoBehaviour
 	public float timer = 0;
 	private Treasure win;
 	private Scene scene;
+	private bool failUITime = false;
 
 	void Start ()
 	{
-		win = playerWin.GetComponent<Treasure> ();
 
+
+
+		win = playerWin.GetComponent<Treasure> ();
 		scene = SceneManager.GetActiveScene ();
 
 
@@ -41,6 +44,12 @@ public class Timer : MonoBehaviour
 
 	void Update ()
 	{
+
+		if (Input.GetKeyDown (KeyCode.F)) {
+			failUITime = true;
+
+		}
+
 		if (!win.playerWin) {
 			timer += Time.deltaTime;
 		}
@@ -57,8 +66,12 @@ public class Timer : MonoBehaviour
 			//GUI.Label (new Rect (10, 10, 500, 200), "Game Timer :", guiStyle);
 			//GUI.Label (new Rect (136, 10, 500, 200), time, guiStyle);
 			GUI.Box (new Rect (10, 10, 125, 25), "Game Timer : " + time, fontSmall);
-		} else if (win.playerWin) {
-			GUI.Label (new Rect (710, 338, 125, 200), time, font);
+		} else if (win.playerWin && !failUITime) {
+			GUI.Label (new Rect (709, 341, 125, 200), time, font);
+			Debug.Log (failUITime);
+		} else if (win.playerWin && failUITime) {
+			GUI.Label (new Rect (709, 341, 125, 200), time + " (Fail Mode)", font);
+
 		}
 	}
 }
