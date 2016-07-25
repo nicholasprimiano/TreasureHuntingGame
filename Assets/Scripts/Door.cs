@@ -24,7 +24,6 @@ public class Door : MonoBehaviour
 	void FixedUpdate ()
 	{
 
-
 		nearDoor = false;
 		if ((player.transform.position - transform.position).magnitude <= 20f && playerKey.hasKey) {
 			textbuffer.textbuffer.text = "Opened the door!";
@@ -34,9 +33,9 @@ public class Door : MonoBehaviour
 				playOnceOpen = false;
 			}
 			doorOpening = true;
-			//gameObject.SetActive (false);
+			playerKey.keyImage.SetActive (false);
 		}
-		Debug.Log (playerKey.hasKey);
+
 		if ((player.transform.position - transform.position).magnitude <= 20f) {
 			textbuffer.textbuffer.text = "The door is locked. Find the key";
 			nearDoor = true;
