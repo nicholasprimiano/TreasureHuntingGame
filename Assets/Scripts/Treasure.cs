@@ -34,7 +34,7 @@ public class Treasure : MonoBehaviour
 		AudioSource notification = GetComponent<AudioSource> ();
 		
 		if (!door.nearDoor) {
-			textbuffer.text = "Treasure is waiting for you somewhere";
+			textbuffer.text = "Treasure is waiting for you somewhere.";
 		}
 		if ((PlayerObject.position - Hint1.position).magnitude < 25f) {
 			textbuffer.text = "SHOOT!!!";
@@ -44,7 +44,7 @@ public class Treasure : MonoBehaviour
 				hasPlayed = true;
 				playable = false;
 			}
-			textbuffer.text = "If you hear somthing strange...start shooting! Also fire is bad fo your health.";
+			textbuffer.text = "If you hear something strange...start shooting! Also fire is bad for your health.";
 		} else if ((PlayerObject.position - Hint2.position).magnitude < 20f) {
 			if (!notification.isPlaying && playable2) {
 				notification.PlayOneShot (notification.clip);
@@ -58,11 +58,11 @@ public class Treasure : MonoBehaviour
 				hasPlayed3 = true;
 				playable3 = false;
 			}
-			textbuffer.text = "I am sure you can get there if you choose a different path....";
+			textbuffer.text = "I am sure you can find the treasure if you choose a different path....";
 		} else if ((PlayerObject.position - Hint4.position).magnitude < 20f) {
 			if (!notification.isPlaying && playable4) {
 				notification.PlayOneShot (notification.clip);
-				textbuffer.text = "Almost, almost!.";
+				textbuffer.text = "Almost there!.";
 				hasPlayed4 = true;
 				playable4 = false;
 			}
@@ -72,7 +72,7 @@ public class Treasure : MonoBehaviour
 				hasPlayed5 = true;
 				playable5 = false;
 			}
-			textbuffer.text = "Press [Z] to get treasure";
+			textbuffer.text = "Press [Z] to loot the treasure!";
 			if (Input.GetKeyDown (KeyCode.Z)) {
 				playerWin = true;
 				SceneManager.LoadScene ("Win Screen");
