@@ -8,8 +8,8 @@ public class PlayerMove : MonoBehaviour
 
 	Vector2 moveVector;
 	Rigidbody2D myRigidbody;
-	public float playerSpeedSet;
-	public float shiftSpeed;
+	private float playerSpeedSet = 15;
+	private float shiftSpeed = 25;
 	private float playerSpeed;
 	public AudioSource hurtSound;
 	public TrailRenderer trailRendererGreen;
@@ -39,6 +39,8 @@ public class PlayerMove : MonoBehaviour
 	public GameObject shield3;
 	public GameObject shield4;
 	private bool shieldActive = false;
+	public float easySpeed;
+	public float easyShiftSpeed;
 
 	// Better practice to initalize a GetComponent<>() in start
 	void Start ()
@@ -48,6 +50,9 @@ public class PlayerMove : MonoBehaviour
 
 		boost.gameObject.SetActive (true);
 		counter.gameObject.SetActive (false);
+
+		easySpeed = playerSpeed * 2;
+		easyShiftSpeed = shiftSpeed * 1.5f;
 	}
 
 	void fireShield ()
@@ -87,7 +92,16 @@ public class PlayerMove : MonoBehaviour
 		}
 		//Debug.Log (numFireShields);
 			
+		if (Input.GetKeyDown (KeyCode.F)) {
+			playerSpeed = easySpeed;
+			playerSpeedSet = easySpeed;
+			shiftSpeed = easyShiftSpeed;
+			//Debug.Log (easySpeed);
+			//Debug.Log (playerSpeed);
+		}
+
 		if (Input.GetKey (KeyCode.W)) {
+			Debug.Log (playerSpeed);
 			myRigidbody.velocity = transform.right * playerSpeed;
 		} 
 		if (Input.GetKey (KeyCode.S)) {
@@ -168,7 +182,6 @@ public class PlayerMove : MonoBehaviour
 			trailRendererGreen.enabled = false;
 			trailRendererRed.enabled = true;
 			playerSpeed = shiftSpeed;
-
 		} else {
 			trailRendererGreen.enabled = true;
 			trailRendererRed.enabled = false;

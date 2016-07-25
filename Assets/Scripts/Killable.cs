@@ -11,7 +11,8 @@ public class Killable : MonoBehaviour
 	public int heathPackValue = 5;
 	public Health healthpack;
 	public PlayerMove player;
-
+	public bool easyMode = false;
+	private int easyMaxHealth = 25;
 	// Use this for initialization
 	void Start ()
 	{
@@ -23,16 +24,27 @@ public class Killable : MonoBehaviour
 	{
 		if (Input.GetKeyDown (KeyCode.Q) && healthpack.hasHealth) {
 			currentHealth += heathPackValue;
-			currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
+			if (!easyMode) { //dont clamp easy mode
+				currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
+			} else {
+				currentHealth = Mathf.Clamp (currentHealth, 0, easyMaxHealth);
+			}
+
 			healthpack.healthImage.SetActive (false);
 			healthpack.hasHealth = false;
 		}
+		if (Input.GetKeyDown (KeyCode.F)) {
+			currentHealth = easyMaxHealth;
+			easyMode = true;
+		}
+
 	}
 
 
 	//Public so death trigger can talk to it
 	public void Hurt (int damage)
 	{
+		
 		//canBeShot.canBeShot is true only after player enters attack trigger
 		//This prevents the player from shooting enemies until they attack
 		//canBeShot.canBeshot is always true for the player
@@ -47,7 +59,11 @@ public class Killable : MonoBehaviour
 			}
 
 			//clap health for all object between 0 and maxHealth
-			currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
+			if (!easyMode) { //dont clamp easy mode
+				currentHealth = Mathf.Clamp (currentHealth, 0, maxHealth);
+			} else {
+				currentHealth = Mathf.Clamp (currentHealth, 0, easyMaxHealth);
+			}
 			//TODO add damage sound
 			if (currentHealth <= 0) {  // object death
 				if (tag == "Enemy") {  // if the object is an enemy play enemy death sound
