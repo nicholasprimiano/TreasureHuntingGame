@@ -9,7 +9,7 @@ public class HealthPickUpSound : MonoBehaviour
 
 	void Update ()
 	{
-		if (health.hasHealth && playOnce) {
+		if (Input.GetKeyDown (KeyCode.Q) && health.hasHealth && playOnce) {
 			AudioSource audio = GetComponent<AudioSource> ();
 			audio.PlayOneShot (audio.clip);
 			playOnce = false;
