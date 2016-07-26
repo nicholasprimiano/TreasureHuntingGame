@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+//Tutorial
 public class MoveFire : MonoBehaviour
 {
 	public Vector3 pointB;
