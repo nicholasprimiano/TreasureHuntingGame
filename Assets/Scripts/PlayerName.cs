@@ -16,7 +16,7 @@ public class PlayerName : MonoBehaviour
 	{
 		if (instance != null) {
 			Destroy (gameObject);
-			print ("Duplicate music player self-destructing!");
+			//print ("Duplicate music player self-destructing!");
 		} else {
 			instance = this;
 			GameObject.DontDestroyOnLoad (gameObject);
