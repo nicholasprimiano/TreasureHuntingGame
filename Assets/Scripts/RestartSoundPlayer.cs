@@ -17,7 +17,8 @@ public class RestartSoundPlayer : MonoBehaviour
 			GameObject.DontDestroyOnLoad (gameObject);
 		}
 		musicPlayer = FindObjectOfType<MusicPlayer> ();
-		musicPlayer.gameObject.SetActive (false);
+		musicPlayer.GetComponent<AudioSource> ().mute = true;
+		//musicPlayer.gameObject.SetActive (false);
 	}
 
 	void Update ()
@@ -26,7 +27,8 @@ public class RestartSoundPlayer : MonoBehaviour
 			AudioSource auido = GetComponent<AudioSource> ();
 			if (!auido.isPlaying) {
 				auido.Play ();
-				musicPlayer.gameObject.SetActive (true);
+				//musicPlayer.gameObject.SetActive (true);
+				musicPlayer.GetComponent<AudioSource> ().mute = false;
 			}
 		}
 	}

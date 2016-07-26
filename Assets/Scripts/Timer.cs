@@ -68,7 +68,7 @@ public class Timer : MonoBehaviour
 			GUI.Box (new Rect (10, 10, 125, 25), "Game Timer : " + time, fontSmall);
 		} else if (win.playerWin && !failUITime) {
 			GUI.Label (new Rect (709, 341, 125, 200), time, font);
-			Debug.Log (failUITime);
+			//Debug.Log (failUITime);
 		} else if (win.playerWin && failUITime) {
 			GUI.Label (new Rect (709, 341, 125, 200), time + " (Fail Mode)", font);
 
